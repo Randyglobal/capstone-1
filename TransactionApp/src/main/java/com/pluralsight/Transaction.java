@@ -5,12 +5,12 @@ import java.time.LocalTime;
 public class Transaction {
     private String name = "";
     private String date = "";
-    private LocalTime time;
+    private String time;
     private String vendor = "";
     private String description = "";
     private double amount = 0;
 
-    public Transaction(String name, String date, LocalTime time, String vendor, String description, double amount) {
+    public Transaction(String name, String date, String time, String vendor, String description, double amount) {
         this.name = name;
         this.date = date;
         this.time = time;
@@ -35,11 +35,11 @@ public class Transaction {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

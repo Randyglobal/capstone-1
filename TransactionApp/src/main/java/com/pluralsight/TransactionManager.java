@@ -12,7 +12,7 @@ public class TransactionManager {
       private static ArrayList<Transaction> transactionList = new ArrayList<>();
       static Scanner scanner = new Scanner(System.in);
         static String name;
-        static LocalDate date;
+        static String date;
         static String time;
         static String vendor;
         static String description;
@@ -24,7 +24,8 @@ public class TransactionManager {
 public static void display(String message){
     System.out.println(message);
 }
-public static void addTransactions() {
+
+public static Transaction getTransactionDetails(String transactionType) {
     display("-------- Hello Welcome to TransactionApp ---------");
     display("Enter your name: ");
     name = scanner.nextLine().trim();
@@ -35,7 +36,7 @@ public static void addTransactions() {
 
     while (!isValid){
         display("Enter Date (e.g 2025-04-29): ");
-        date = LocalDate.parse(scanner.nextLine());
+        date = scanner.nextLine();
         try {
             dateInput = LocalDate.parse(date, fmt);
             transactionDate = fmt.format(dateInput);
@@ -49,15 +50,30 @@ public static void addTransactions() {
     description = scanner.nextLine();
     display("Enter Vendor: ");
     vendor = scanner.nextLine();
-    display("Enter Amount: ");
-    amount = scanner.nextDouble();
-    time = String.valueOf(LocalTime.now());
-    LocalTime inputTime = LocalTime.parse(time);
-    Transaction transaction = new Transaction(name, transactionDate, inputTime, vendor, description, amount);
+    if (transactionType.equalsIgnoreCase("Deposit")){
+        display("Enter Amount: $");
+        amount = scanner.nextDouble();
+    } else if (transactionType.equalsIgnoreCase("Payment")) {
+        display("Enter Amount: $");
+        amount = -scanner.nextDouble();
+    }
+    scanner.nextLine();
+    LocalTime now = LocalTime.now();
+    time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    return new Transaction(name, transactionDate, time, vendor, description, amount);
+}
 
+public static void addDeposit(){
+    Transaction transaction = getTransactionDetails("Deposit");
     transactionList.add(transaction);
     writeToFile(transaction);
 }
+public static void makePayment(){
+        Transaction transaction = getTransactionDetails("Payment");
+        transactionList.add(transaction);
+        writeToFile(transaction);
+    }
+
 public static void writeToFile(Transaction transaction){
  try {
      BufferedWriter Writer = new BufferedWriter(new FileWriter(fileName, true));
@@ -70,6 +86,7 @@ public static void writeToFile(Transaction transaction){
      display("Invoked Error");
  }
 }
+
 public static void readFile(){
     try {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
@@ -78,7 +95,7 @@ public static void readFile(){
             String[] linePart = line.split("\\|");
              name = linePart[0];
              LocalDate date = LocalDate.parse(linePart[1]);
-             time = LocalTime.parse(linePart[2]);
+             time = String.valueOf(LocalTime.parse(linePart[2]));
             description = linePart[3];
             vendor = linePart[4];
             amount = Double.parseDouble(linePart[5]);
