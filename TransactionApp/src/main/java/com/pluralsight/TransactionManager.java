@@ -17,6 +17,7 @@ public class TransactionManager {
         static String vendor;
         static String description;
         static double amount;
+        static String inputVendor;
         static String fileName = "transactions.csv";
 
 
@@ -68,6 +69,7 @@ public static void addDeposit(){
     transactionList.add(transaction);
     writeToFile(transaction);
 }
+
 public static void makePayment(){
         Transaction transaction = getTransactionDetails("Payment");
         transactionList.add(transaction);
@@ -87,6 +89,7 @@ public static void writeToFile(Transaction transaction){
  }
 }
 
+
 public static void readFile(){
     try {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
@@ -105,73 +108,104 @@ public static void readFile(){
                     "Time: " + time + "\n" +
                     "Description: " + description + "\n" +
                     "Vendor: " + vendor + "\n" +
-                    "Amount: " + amount);
+                    "Amount: $" + amount);
             display(" ");
         }
+        bufferedReader.close();
     } catch (IOException e) {
         display("Invoked Error" + e);
     }
 }
 
-    public static void readPayment(){
+public static void readPayment(){
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
             String line;
             while ((line = bufferedReader.readLine()) != null){
                 String[] linePart = line.split("\\|");
-               if (amount < 0){
-                   name = linePart[0];
-                   LocalDate date = LocalDate.parse(linePart[1]);
-                   time = String.valueOf(LocalTime.parse(linePart[2]));
-                   description = linePart[3];
-                   vendor = linePart[4];
-                   amount = Double.parseDouble(linePart[5]);
-
-                   display("Name: " + name + "\n"
-                           + "Date: " + date + "\n" +
-                           "Time: " + time + "\n" +
-                           "Description: " + description + "\n" +
-                           "Vendor: " + vendor + "\n" +
-                           "Amount: " + amount);
-                   display(" ");
-               }else{
-                   display("Invoked Error");
-               }
-            }
-        } catch (IOException e) {
-            display("Invoked Error" + e);
-        }
-    }
-
-    public static void readDeposit(){
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-            String line;
-            while ((line = bufferedReader.readLine()) != null){
-                String[] linePart = line.split("\\|");
-                if (amount > 0){
+                if (linePart.length == 6) {
                     name = linePart[0];
                     LocalDate date = LocalDate.parse(linePart[1]);
                     time = String.valueOf(LocalTime.parse(linePart[2]));
                     description = linePart[3];
                     vendor = linePart[4];
                     amount = Double.parseDouble(linePart[5]);
-
-                    display("Name: " + name + "\n"
-                            + "Date: " + date + "\n" +
-                            "Time: " + time + "\n" +
-                            "Description: " + description + "\n" +
-                            "Vendor: " + vendor + "\n" +
-                            "Amount: " + amount);
-                    display(" ");
-                }else{
-                    display("Invoked Error");
+                    if (amount < 0) {
+                        display("Name: " + name + "\n"
+                                + "Date: " + date + "\n" +
+                                "Time: " + time + "\n" +
+                                "Description: " + description + "\n" +
+                                "Vendor: " + vendor + "\n" +
+                                "Amount: $" + amount);
+                        display(" ");
+                    }
                 }
             }
+            bufferedReader.close();
         } catch (IOException e) {
             display("Invoked Error" + e);
         }
     }
 
+public static void readDeposit(){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            String line;
+            while ((line = bufferedReader.readLine()) != null){
+                String[] linePart = line.split("\\|");
+                if (linePart.length == 6) {
+                    name = linePart[0];
+                    LocalDate date = LocalDate.parse(linePart[1]);
+                    time = String.valueOf(LocalTime.parse(linePart[2]));
+                    description = linePart[3];
+                    vendor = linePart[4];
+                    amount = Double.parseDouble(linePart[5]);
+                    if (amount > 0) {
+                        display("Name: " + name + "\n"
+                                + "Date: " + date + "\n" +
+                                "Time: " + time + "\n" +
+                                "Description: " + description + "\n" +
+                                "Vendor: " + vendor + "\n" +
+                                "Amount: $" + amount);
+                        display(" ");
+                    }
+                }
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            display("Invoked Error" + e);
+        }
+    }
 
+public static void searchByVendor(){
+    display("Enter Vendor Name: ");
+    inputVendor = scanner.nextLine().trim();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            String line;
+            while ((line = bufferedReader.readLine()) != null){
+                String[] linePart = line.split("\\|");
+                if (linePart.length == 6) {
+                    name = linePart[0];
+                    LocalDate date = LocalDate.parse(linePart[1]);
+                    time = String.valueOf(LocalTime.parse(linePart[2]));
+                    description = linePart[3];
+                    vendor = linePart[4];
+                    amount = Double.parseDouble(linePart[5]);
+                    if (vendor.equalsIgnoreCase(inputVendor)) {
+                        display("Name: " + name + "\n"
+                                + "Date: " + date + "\n" +
+                                "Time: " + time + "\n" +
+                                "Description: " + description + "\n" +
+                                "Vendor: " + vendor + "\n" +
+                                "Amount: $" + amount);
+                        display(" ");
+                    }
+                }
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            display("Invoked Error" + e);
+        }
+    }
 }

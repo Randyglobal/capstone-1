@@ -12,19 +12,30 @@ public class Ledger {
      boolean option = true;
      while (option){
          display("A) - View all entries");
-         display("B) - View deposit only");
-         display("C) - View payments only");
-         display("D) - Reports");
+         display("D) - View deposit only");
+         display("P) - View payments only");
+         display("R) - Reports");
+         display("H) - Return to Home Screen");
          display("Enter command: ");
          String res = scanner.nextLine();
 
          switch (res){
              case "A":
                  TransactionManager.readFile();
-             case "B":
+                 break;
+             case "D":
                 TransactionManager.readDeposit();
-             case "C":
+                break;
+             case "P":
                  TransactionManager.readPayment();
+                 break;
+             case "R":
+                 display("Routing to Report Screen....");
+                 Report.ReportScreen();
+                 break;
+             case "H":
+                 display("Returning to Home Screen......");
+                 Main.homeScreen();
          }
      }
     }

@@ -16,6 +16,7 @@ public class Main {
             display("2 - Make Payment (Debit)");
             display("3 - Ledger Screen");
             display("4 - Exit");
+            display("Enter Command: ");
             int res = scanner.nextInt();
             switch (res){
                 case 1:
@@ -27,7 +28,7 @@ public class Main {
                 case 3:
                     Ledger.ledgerScreen();
                 case 4:
-                    display = false;
+                    display("Exiting app.... Bye...... \uD83D\uDE0A");
                     return;
             }
         }
