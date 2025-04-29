@@ -15,7 +15,6 @@ public class Ledger {
          display("B) - View deposit only");
          display("C) - View payments only");
          display("D) - Reports");
-         display("E - Exit");
          display("Enter command: ");
          String res = scanner.nextLine();
 
@@ -23,8 +22,9 @@ public class Ledger {
              case "A":
                  TransactionManager.readFile();
              case "B":
-                 display("Returning to Home Screen....");
-                 Main.homeScreen();
+                TransactionManager.readDeposit();
+             case "C":
+                 TransactionManager.readPayment();
          }
      }
     }
