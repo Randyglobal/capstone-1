@@ -17,7 +17,7 @@ public class Report {
             display("3) - Year to Date");
             display("4) - Previous Year");
             display("5) - Vendor");
-            display("6) - Other Search");
+            display("6) - Custom Search");
             display("0) - Back to Ledger Screen");
             display("Enter command: ");
             int res = scanner.nextInt();
@@ -39,8 +39,7 @@ public class Report {
                     TransactionManager.searchByVendor();
                     break;
                 case 6:
-                    display("Other options.....");
-                    Option.optionSearch();
+                    TransactionManager.customSearch();
                     break;
                 case 0:
                     display("Returning to Ledger......");

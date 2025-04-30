@@ -232,4 +232,28 @@ public class TransactionManager {
         }
     }
 
+//    custom search
+    public static void customSearch(){
+         display("Enter start date e.g (2025-04-30)");
+         String startDateToString = scanner.nextLine();
+         LocalDate startDate = LocalDate.parse(startDateToString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+         display("Enter end date e.g (2025-04-30)");
+         String endDateToString = scanner.nextLine();
+         LocalDate endDate = LocalDate.parse(endDateToString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        display("------- Result ------");
+         boolean res = false;
+         for (Transaction transaction : transactionList){
+             LocalDate transactionDate = LocalDate.parse(transaction.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+             if (transactionDate.isBefore(endDate) && transactionDate.isAfter(startDate)){
+                 displayTransaction(transaction);
+                 res = true;
+             }
+         }
+         if (!res){
+             display(
+                     "Invalid Entry"
+             );
+         }
+    }
+
 }
