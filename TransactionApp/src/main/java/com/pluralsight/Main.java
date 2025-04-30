@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+    static int res;
     public static void main(String[] args) {
-   homeScreen();
+       res = homeScreen();
     }
-    public  static void homeScreen(){
+    public  static int homeScreen(){
         display("Please select Option");
         boolean display = true;
         while (display){
@@ -17,7 +18,8 @@ public class Main {
             display("3 - Ledger Screen");
             display("4 - Exit");
             display("Enter Command: ");
-            int res = scanner.nextInt();
+            res = scanner.nextInt();
+            scanner.nextLine();
             switch (res){
                 case 1:
                     TransactionManager.addDeposit();
@@ -27,11 +29,14 @@ public class Main {
                     break;
                 case 3:
                     Ledger.ledgerScreen();
+                    break;
                 case 4:
                     display("Exiting app.... Bye...... \uD83D\uDE0A");
-                    return;
+                    display = false;
+                    break;
             }
         }
+        return res;
     }
     public static void display(String message){
         System.out.println(message);

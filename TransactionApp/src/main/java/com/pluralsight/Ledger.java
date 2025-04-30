@@ -35,7 +35,8 @@ public class Ledger {
                  break;
              case "H":
                  display("Returning to Home Screen......");
-                 Main.homeScreen();
+                 option = false;
+                 break;
          }
      }
     }

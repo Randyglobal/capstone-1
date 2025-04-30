@@ -23,22 +23,24 @@ public class Report {
 
             switch (res){
                 case 1:
-                    TransactionManager.readFile();
+                    TransactionManager.searchByCurrentDate();
                     break;
                 case 2:
-                    TransactionManager.readDeposit();
+                    TransactionManager.searchByPreviousDate();
                     break;
                 case 3:
-                    TransactionManager.readPayment();
+                    TransactionManager.searchByCurrentYear();
                     break;
                 case 4:
-
+                    TransactionManager.searchByPreviousYear();
+                    break;
                 case 5:
                     TransactionManager.searchByVendor();
                     break;
                 case 0:
                     display("Returning to Ledger......");
-                    Ledger.ledgerScreen();
+                    option = false;
+                    break;
 
             }
         }
