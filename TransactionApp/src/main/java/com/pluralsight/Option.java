@@ -2,23 +2,22 @@ package com.pluralsight;
 
 import java.util.Scanner;
 
-public class Report {
+public class Option {
     public  static void display(String message){
         System.out.println(message);
     }
-    public static void ReportScreen(){
+    public static void optionSearch(){
         Scanner scanner = new Scanner(System.in);
         display("------- Report Screen -------");
         boolean option = true;
         while (option){
             display("Search By.......");
-            display("1) - Month To Date");
-            display("2) - Previous Month");
-            display("3) - Year to Date");
-            display("4) - Previous Year");
-            display("5) - Vendor");
-            display("6) - Other Search");
-            display("0) - Back to Ledger Screen");
+            display("1) - Start Date");
+            display("2) - End Date");
+            display("3) - Description");
+            display("4) - Vendor");
+            display("5) - Amount");
+            display("0) - Back to Report Page");
             display("Enter command: ");
             int res = scanner.nextInt();
 
@@ -43,7 +42,7 @@ public class Report {
                     Option.optionSearch();
                     break;
                 case 0:
-                    display("Returning to Ledger......");
+                    display("Returning to Report......");
                     option = false;
                     break;
 
@@ -51,3 +50,4 @@ public class Report {
         }
     }
 }
+
