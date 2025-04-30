@@ -17,7 +17,6 @@ public class TransactionManager {
         static String vendor;
         static String description;
         static double amount;
-        static String inputVendor;
         static String fileName = "transactions.csv";
 
 
