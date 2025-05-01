@@ -6,6 +6,7 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
     static int res;
     public static void main(String[] args) {
+        TransactionManager.readFile();
        res = homeScreen();
     }
     public  static int homeScreen(){
