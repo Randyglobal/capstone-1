@@ -75,3 +75,10 @@ TransactionSystem/
 │   └── Main.java                // The main entry point of the application. This class contains the main method that starts the program execution and likely orchestrates the initial user interface and navigation.
 
 └── README.md                    // This file, providing information about the project.
+
+
+
+
+##                     Output
+
+![alt text](image.png)

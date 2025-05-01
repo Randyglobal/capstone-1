@@ -79,7 +79,7 @@ public class TransactionManager {
     public static void writeToFile(Transaction transaction){
          try {
              BufferedWriter Writer = new BufferedWriter(new FileWriter(fileName, true));
-             String line = String.join(" | ", transaction.getName(), transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(),String.valueOf(transaction.getAmount()));
+             String line = String.join("|", transaction.getName(), transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(),String.valueOf(transaction.getAmount()));
              Writer.write(line);
              Writer.newLine();
              display("Transaction Saved");
@@ -99,7 +99,7 @@ public class TransactionManager {
         display(" ");
     }
 //    Read file method
-    private static void breakTransactionLine( double filteredAmount){
+    public static void breakTransactionLine(){
          try {
              BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
              String line;
@@ -113,9 +113,7 @@ public class TransactionManager {
                      vendor = linePart[4];
                      amount = Double.parseDouble(linePart[5]);
                      transactionList.add(new Transaction(name, String.valueOf(date), time, vendor, description, amount));
-                     if (filteredAmount == 0 || (filteredAmount > 0 && amount > 0) || (filteredAmount < 0 && amount < 0)){
-                         displayTransaction(new Transaction(name, date.toString(), time, vendor, description, amount));
-                     }
+
                  }else {
                      display("Invalid" + line);
                  }
@@ -125,7 +123,7 @@ public class TransactionManager {
          }
 }
 //display search
-    public static List<Transaction> displaySearch(List<Transaction> filteredSearch){
+    public static void displaySearch(List<Transaction> filteredSearch){
         int filteredTransaction = filteredSearch.size();
         if (filteredTransaction == 0){
             display("Invalid search");
@@ -135,19 +133,32 @@ public class TransactionManager {
                 displayTransaction(transaction);
             }
         }
-        return filteredSearch;
     }
 //  read all transaction
-    public static void readFile(){
-       breakTransactionLine(0);
+    public static void readFile()
+    {
+       displaySearch(transactionList);
     }
 //    read all payments
     public static void readPayment(){
-       breakTransactionLine(-1);
+//         storing all the payments in a seperate array
+       List<Transaction> payment = new ArrayList<>();
+       for (Transaction transaction: transactionList){
+           if (transaction.getAmount() < 0){
+               payment.add(transaction);
+           }
+       }
+       displaySearch(payment);
     }
 //   Read all deposits
     public static void readDeposit(){
-        breakTransactionLine(1);
+        List<Transaction> deposit = new ArrayList<>();
+        for (Transaction transaction: transactionList){
+            if (transaction.getAmount() > 0){
+                deposit.add(transaction);
+            }
+        }
+        displaySearch(deposit);
     }
     //    search by current date
     public static void searchByCurrentDate() {
@@ -220,7 +231,7 @@ public class TransactionManager {
         boolean found = false;
         for (Transaction transaction : transactionList) {
             LocalDate currentMonthTransaction = LocalDate.parse(transaction.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            int transactionMonth = currentMonthTransaction.getMonthValue();
+            int transactionMonth = currentMonthTransaction.getYear();
             if (transactionMonth == previousYearValue) {
                 filteredYear.add(transaction);
                 found = true;
