@@ -6,6 +6,7 @@ public class Report {
     public  static void display(String message){
         System.out.println(message);
     }
+//    Report screen
     public static void ReportScreen(){
         Scanner scanner = new Scanner(System.in);
         display("------- Report Screen -------");

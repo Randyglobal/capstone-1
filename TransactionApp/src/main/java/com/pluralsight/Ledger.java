@@ -6,6 +6,7 @@ public class Ledger {
     public  static void display(String message){
         System.out.println(message);
     }
+//    Ledger Screen
     public static void ledgerScreen(){
         Scanner scanner = new Scanner(System.in);
      display("-------  Ledger Screen -------");

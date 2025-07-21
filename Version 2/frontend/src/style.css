@@ -1,0 +1,136 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.wrapper {
+    display: flex;
+    flex: 1; /* Allows content to expand and fill space */
+}
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #343a40; /* Dark background for sidebar */
+    color: #fff;
+    transition: all 0.3s;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+}
+/* Style for collapsing sidebar on smaller screens */
+#sidebar.active {
+    margin-left: -250px;
+}
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #474d53;
+    text-align: center;
+    width: 100%; /* Ensure header takes full width for centering */
+}
+.sidebar-header h3 {
+    color: #fff;
+    margin-bottom: 0;
+}
+.sidebar-items ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #474d53;
+    width: 100%; /* Ensure the ul takes full width */
+    text-align: center; /* Center the "button" links within the list item */
+}
+.sidebar-items ul li {
+    margin-bottom: 5px; /* Added margin between list items */
+    width: 100%; /* Ensure list item takes full width for button */
+    display: flex; /* Use flex to center the button within the li */
+    justify-content: center; /* Center the button horizontally */
+}
+/* Styling for the new sidebar-btn class */
+.sidebar-btn {
+    padding: 10px 15px; /* Adjusted padding */
+    font-size: 1.1em;
+    display: block; /* Make it a block-level element to take full width and act like a button */
+    color: #dee2e6; /* Default text color */
+    text-decoration: none; /* Removed text decoration */
+    border-radius: 5px; /* Added border-radius for rounded corners */
+    transition: all 0.2s ease-in-out; /* Added transition for smooth effects */
+    margin: 0 15px; /* Add horizontal margin for spacing from sidebar edges */
+    background-color: #495057; /* A subtle background for non-active buttons */
+    text-align: left; /* Align text to the left within the button */
+    width: calc(100% - 30px); /* Calculate width to account for 15px margin on each side */
+}
+
+.sidebar-btn i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.sidebar-btn:hover {
+    color: #fff;
+    background: #5a6268; /* Slightly lighter hover background */
+}
+
+.sidebar-items ul li.active > .sidebar-btn,
+.sidebar-items .sidebar-btn[aria-expanded="true"] {
+    color: #fff;
+    background: #0d6efd; /* Bootstrap primary blue for active state */
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    width: 100%;
+}
+/* Custom style for alert container */
+#statusAlertContainer {
+    margin-top: 20px; /* Space below navbar */
+}
+/* Hide sections by default */
+.content-section {
+    display: none;
+}
+/* Show active section */
+.content-section.active {
+    display: block;
+}
+
+/* Custom styles for the search input in the Customers section */
+.md-form .form-control {
+    border-bottom: 1px solid #ced4da;
+    box-shadow: none;
+}
+
+.md-form .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.input-group-text {
+    background-color: #0d6efd; /* Bootstrap primary blue */
+    border: 1px solid #0d6efd;
+    color: white;
+    cursor: pointer;
+}
+
+.input-group-text a {
+    color: white;
+    text-decoration: none;
+}
+
+
+
+

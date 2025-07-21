@@ -9,7 +9,7 @@ public class Transaction {
     private String vendor = "";
     private String description = "";
     private double amount = 0;
-
+//constructor
     public Transaction(String name, String date, String time, String vendor, String description, double amount) {
         this.name = name;
         this.date = date;
